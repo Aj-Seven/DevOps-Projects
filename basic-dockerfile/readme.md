@@ -16,7 +16,7 @@ Sample solution for the [basic-dockerfile](https://roadmap.sh/projects/basic-doc
   ```
   - Now go to cloned Directory
   ```bash
-  cd DevOps-Projects
+  cd DevOps-Projects/basic-dockerfile
   ```
   - Run Build Command
   ```bash
