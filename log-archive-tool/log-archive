@@ -1,0 +1,48 @@
+#!/bin/bash
+
+_prompt() {
+    echo "Archive Tool"
+    read -p "Enter the log directory: " log_dir
+    read -p "Enter the number of days of logs to keep (default: 7): " days_to_keep
+    read -p "Enter the number of days to keep backups (default: 30): " days_to_backup
+
+    log_dir=${log_dir:-/var/log}
+    days_to_keep=${days_to_keep:-7}
+    days_to_backup=${days_to_backup:-30}
+}
+
+DEFAULT_LOG_DIR="/var/log"
+DEFAULT_DAYS_TO_KEEP=7
+DEFAULT_DAYS_TO_BACKUP=30
+
+# Check if log directory and days to keep are provided, otherwise show the prompt
+if [ -z "$1" ]; then
+    _prompt
+else
+    log_dir=$1
+    days_to_keep=${2:-$DEFAULT_DAYS_TO_KEEP}
+    days_to_backup=${3:-$DEFAULT_DAYS_TO_BACKUP}
+fi
+
+archive_dir="$log_dir/archive"
+mkdir -p "$archive_dir"
+
+timestamp=$(date +"%Y%m%d_%H%M%S")
+archive_file="$archive_dir/logs_archive_$timestamp.tar.gz"
+
+# Archive logs older than the specified number of days
+find "$log_dir" -type f -mtime +$days_to_keep -print0 | tar -czvf "$archive_file" --null -T -
+
+# Log the archival operation
+echo "Logs archived in $archive_file on $(date)" >> "$archive_dir/archive_log.txt"
+
+# Remove log files older than the specified number of days
+find "$log_dir" -type f -mtime +$days_to_keep -exec rm -r {} \;
+
+echo "Archiving completed: $archive_file"
+
+# Remove backup archives older than the specified number of days to backup
+find "$archive_dir" -type f -name "*.tar.gz" -mtime +$days_to_backup -exec rm -f {} \;
+
+echo "Backup archives older than $days_to_backup days have been deleted."
+
