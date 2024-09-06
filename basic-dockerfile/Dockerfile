@@ -1,2 +1,2 @@
-FROM alpline:latest
-CMD [ "echo", "Hello Aj7!!"]
+FROM alpine:latest
+CMD [ "echo", "Hello, Captain!"]
