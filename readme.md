@@ -17,3 +17,9 @@ Sample solution for the [log-archive-tool](https://roadmap.sh/projects/log-archi
 Sample solution for the [dummy-system-service](https://roadmap.sh/projects/dummy-systemd-service) challenge from [roadmap](https://roadmap.sh)
 
 ---
+
+- [File Integrity Checker](https://roadmap.sh/projects/file-integrity-checker) - _ShellScript_
+
+Sample solution for the [file-integrity-checker](https://roadmap.sh/projects/file-integrity-checker) challenge from [roadmap](https://roadmap.sh)
+
+---
