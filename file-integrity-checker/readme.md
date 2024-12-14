@@ -36,3 +36,10 @@ chmod +x integrity-check
 > ./integrity-check update /var/log/syslog
 > Hash updated successfully.
 ```
+
+**Note:**
+> Hash files are stored in base path - `~/.local/share/hash`
+>
+> Hash File Format's - `filename-date.sha256sum` or `pathname-date.sha256sum`
+>
+> Date Format - +%Y-%m-%d_%H-%M-%S
